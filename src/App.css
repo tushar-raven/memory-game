@@ -18,13 +18,28 @@
 }
 
 .card {
-  width: 100px;
-  height: 100px;
-  background-color: green;
+  width: 200px;
+  height: 250px;
+  background-color: #a8d3e9;
+}
+
+.card-image {
+  width: 200px;
+  height: 200px;
+}
+
+.name {
+  font-size: 16px;
+  text-align: center;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  padding: 20px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
 }

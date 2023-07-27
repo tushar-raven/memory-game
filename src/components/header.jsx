@@ -6,7 +6,7 @@ const Header = (props) => {
 
   return (
     <div className="header">
-      <div className="header-text">Pokemon Memory Game</div>
+      <div className="header-text">R&M Memory Game</div>
       <div>
         <div>Score: {score}</div>
         <div>Best Score: {bestScore}</div>

@@ -1,32 +1,21 @@
-import { useState } from "react";
+//import { useState } from "react";
 import PropTypes from "prop-types";
 
 const Card = (props) => {
-  const [isclicked, setIsClicked] = useState(false);
-  const { handleScore, gameOver } = props;
+  const { handleCardClick, img, name } = props;
 
-  function handleClick() {
-    if (isclicked === false) {
-      setIsClicked(true);
-      handleScore();
-    } else {
-      gameOver();
-      setIsClicked(false);
-    }
-  }
-
-  console.log(isclicked);
   return (
-    <div className="card" onClick={handleClick}>
-      <img></img>
-      <div></div>
+    <div className="card" onClick={handleCardClick}>
+      <img className="card-image" src={img}></img>
+      <div className="name">{name}</div>
     </div>
   );
 };
 
 Card.propTypes = {
-  handleScore: PropTypes.func.isRequired,
-  gameOver: PropTypes.func.isRequired,
+  handleCardClick: PropTypes.func.isRequired,
+  img: PropTypes.any,
+  name: PropTypes.any,
 };
 
 export default Card;
