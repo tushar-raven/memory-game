@@ -8,18 +8,18 @@ const Container = () => {
   const [bestScore, setBestScore] = useState(0);
   const [cardClicked, setCardClicked] = useState(Array(15).fill(false));
   const [shouldShuffle, setShouldShuffle] = useState(true);
-  const [assets, setAssets] = useState({});
+  const [card, setCard] = useState([]);
 
   useEffect(() => {
     const fetchAssets = async () => {
       const results = await getAssets();
-      setAssets(results);
+      setCard(results);
     };
 
     fetchAssets();
   }, []);
 
-  console.log(assets);
+  console.log(card);
 
   useEffect(() => {
     if (shouldShuffle) {
@@ -69,8 +69,7 @@ const Container = () => {
         handleCardClick={() => handleCardClick(i)}
         key={i}
         isClicked={cardClicked[i]}
-        img={assets.image ? assets.image[i] : null} //conditional for fetching time
-        name={assets.name ? assets.name[i] : null}
+        card={card[i]}
       />
     );
   }

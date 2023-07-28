@@ -1,17 +1,15 @@
-async function getAssets() {
+async function getCards() {
   const response = await fetch("https://rickandmortyapi.com/api/character");
 
   const data = await response.json();
-  const nameArray = [];
-  const imageArray = [];
-  const assetObj = {};
+  const card = [];
   for (let i = 0; i < 16; i++) {
-    nameArray.push(data.results[i].name);
-    imageArray.push(data.results[i].image);
+    const cardObj = {};
+    cardObj["name"] = data.results[i].name;
+    cardObj["image"] = data.results[i].image;
+    card.push(cardObj);
   }
-  assetObj["name"] = nameArray;
-  assetObj["image"] = imageArray;
-  return assetObj;
+  return card;
 }
 
-export default getAssets;
+export default getCards;
