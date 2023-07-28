@@ -1,23 +1,24 @@
 import Card from "./Card";
 import Header from "./Header";
-import getAssets from "./assets";
+import getCards from "./assets";
 import { useState, useEffect } from "react";
 
 const Container = () => {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cardClicked, setCardClicked] = useState(Array(15).fill(false));
   const [shouldShuffle, setShouldShuffle] = useState(true);
   const [card, setCard] = useState([]);
 
   useEffect(() => {
     const fetchAssets = async () => {
-      const results = await getAssets();
+      const results = await getCards();
       setCard(results);
     };
 
     fetchAssets();
   }, []);
+
+  console.log(card);
 
   useEffect(() => {
     if (shouldShuffle) {
@@ -34,35 +35,41 @@ const Container = () => {
   const gameOver = () => {
     setBestScore((prevScore) => Math.max(prevScore, score));
     setScore(0);
-    setCardClicked(Array(15).fill(false));
+    setCard((prevClick) => {
+      const cards = [...prevClick];
+      for (let i = 0; i < cards.length; i++) {
+        cards[i]["isClicked"] = false;
+      }
+      return cards;
+    });
     setShouldShuffle(true);
   };
 
   const shuffleCards = () => {
-    setCardClicked((prevClicked) => {
-      const shuffledClicked = [...prevClicked];
-      let currentIndex = shuffledClicked.length,
+    setCard((prevClicked) => {
+      const cards = [...prevClicked];
+      let currentIndex = cards.length,
         randomIndex;
 
       while (currentIndex != 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
-        [shuffledClicked[currentIndex], shuffledClicked[randomIndex]] = [
-          shuffledClicked[randomIndex],
-          shuffledClicked[currentIndex],
+        [cards[currentIndex], cards[randomIndex]] = [
+          cards[randomIndex],
+          cards[currentIndex],
         ];
       }
-
-      return shuffledClicked;
+      console.log(cards);
+      return cards;
     });
   };
 
   const handleCardClick = (cardIndex) => {
-    if (!cardClicked[cardIndex]) {
-      setCardClicked((prevClicked) => {
+    if (!card[cardIndex].isClicked) {
+      setCard((prevClicked) => {
         const updatedClicked = [...prevClicked];
-        updatedClicked[cardIndex] = true;
+        updatedClicked[cardIndex].isClicked = true;
         return updatedClicked;
       });
       handleScore();
@@ -77,7 +84,6 @@ const Container = () => {
       <Card
         handleCardClick={() => handleCardClick(i)}
         key={i}
-        isClicked={cardClicked[i]}
         card={card ? card[i] : null}
       />
     );

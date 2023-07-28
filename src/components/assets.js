@@ -3,10 +3,11 @@ async function getCards() {
 
   const data = await response.json();
   const card = [];
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < 15; i++) {
     const cardObj = {};
     cardObj["name"] = data.results[i].name;
     cardObj["image"] = data.results[i].image;
+    cardObj.isClicked = false;
     card.push(cardObj);
   }
   return card;
