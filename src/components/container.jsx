@@ -1,7 +1,7 @@
+import { useState, useEffect } from "react";
 import Card from "./Card";
 import Header from "./Header";
 import getCards from "./assets";
-import { useState, useEffect } from "react";
 
 const Container = () => {
   const [score, setScore] = useState(0);
