@@ -19,8 +19,6 @@ const Container = () => {
     fetchAssets();
   }, []);
 
-  console.log(card);
-
   useEffect(() => {
     if (shouldShuffle) {
       shuffleCards();
@@ -43,7 +41,19 @@ const Container = () => {
   const shuffleCards = () => {
     setCardClicked((prevClicked) => {
       const shuffledClicked = [...prevClicked];
-      shuffledClicked.sort(() => Math.random() - 0.5);
+      let currentIndex = shuffledClicked.length,
+        randomIndex;
+
+      while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [shuffledClicked[currentIndex], shuffledClicked[randomIndex]] = [
+          shuffledClicked[randomIndex],
+          shuffledClicked[currentIndex],
+        ];
+      }
+
       return shuffledClicked;
     });
   };
