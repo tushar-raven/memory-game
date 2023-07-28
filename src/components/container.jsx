@@ -62,14 +62,13 @@ const Container = () => {
   };
 
   const cardArray = [];
-
   for (let i = 0; i < 15; i++) {
     cardArray.push(
       <Card
         handleCardClick={() => handleCardClick(i)}
         key={i}
         isClicked={cardClicked[i]}
-        card={card[i]}
+        card={card ? card[i] : null}
       />
     );
   }
