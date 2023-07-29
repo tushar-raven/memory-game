@@ -16,6 +16,10 @@ const Container = () => {
     };
 
     fetchAssets();
+
+    return () => {
+      setCard([]);
+    };
   }, []);
 
   console.log(card);
